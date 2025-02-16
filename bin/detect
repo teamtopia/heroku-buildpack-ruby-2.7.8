@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Detect if the app uses Ruby
+if [ -f Gemfile ]; then
+  echo "Custom Ruby 2.7.8 Buildpack"
+  exit 0
+else
+  exit 1
+fi
+

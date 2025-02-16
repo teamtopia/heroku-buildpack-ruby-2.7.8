@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+BUILD_DIR=$1  # Heroku's app directory
+CACHE_DIR=$2  # Build cache (not needed here)
+ENV_DIR=$3    # Environment vars (not needed here)
+
+echo "Installing Ruby 2.7.8..."
+
+# Step 1: Create a directory for Ruby
+mkdir -p "$BUILD_DIR/vendor/ruby"
+
+# Step 2: Download Ruby 2.7.8 binary (ensure it's hosted somewhere like S3 or GitHub)
+curl -L -o "$BUILD_DIR/vendor/ruby-2.7.8.tgz" \
+  "https://heroku-buildpack-ruby.s3.us-east-1.amazonaws.com/heroku-20/ruby-2.7.8.tgz"
+
+# Step 3: Extract Ruby into the correct directory
+tar -xvzf "$BUILD_DIR/vendor/ruby-2.7.8.tgz" -C "$BUILD_DIR/vendor/ruby"
+
+# Step 4: Set up the environment variables for runtime
+echo "export PATH=\"$BUILD_DIR/vendor/ruby/bin:\$PATH\"" > "$BUILD_DIR/.profile.d/ruby.sh"
+
+echo "Ruby 2.7.8 installed successfully."
+
