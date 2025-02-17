@@ -3,7 +3,7 @@ BUILD_DIR=$1  # Heroku's app directory
 CACHE_DIR=$2  # Build cache (not needed here)
 ENV_DIR=$3    # Environment vars (not needed here)
 
-echo "Installing Ruby 2.7.8..."
+echo "custom build pack: Installing Ruby 2.7.8..."
 
 # Step 1: Create a directory for Ruby
 mkdir -p "$BUILD_DIR/vendor/ruby"
